@@ -13,12 +13,14 @@
   <link rel="stylesheet" href="css/theme/light.css">
   <!-- CSS LIB -->
   <link rel="stylesheet" href="css/libs/all.min.css">
+  <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css" type="text/css">
+    <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
 </head>
 <body class="flx">
-
-  <!-- POP UPS -->
-  <div class="popup-container flx">
+  <!-- MODALS POPUPS -->
     <!-- LOGIN POP UP -->
+    <dialog class=" modal login-modal">
+    <button class="close-btn login-btn-close"><i class="fa fa-solid fa-rectangle-xmark"></i></button>
     <form action="" class="popup login flx flx-c">
       <div class="field  flx">
         <label for="username" class="icon flx"><i class="fa fa-solid fa-user-alt"></i></label>
@@ -36,8 +38,14 @@
         <input type="submit" name="submit" value="login">
       </div>
     </form>
+    </dialog>
     <!-- ALTER COUNTRY POP UP -->
-    <form action="" class="popup alter flx flx-c">
+    <dialog class="modal alter-modal">
+      <form action="" method="dialog" class="popup alter flx flx-c">
+        <div class="field  flx">
+        <label for="countryName" class="icon flx"><i class="fa fa-solid fa-globe"></i></label>
+        <input disabled type="text" value="morocco" name="countryName" id="countryName">
+      </div>
       <div class="field  flx">
         <label for="capital" class="icon flx"><i class="fa fa-solid fa-flag"></i></label>
         <input type="text" value="rabat" name="capital" id="capital">
@@ -46,14 +54,13 @@
         <label for="population" class="icon flx"><i class="fa fa-solid fa-people-group"></i></label>
         <input type="text" value='37568425' name="population" id="population">
       </div>
-      <div class="field  flx">
+      <div class="field buttons  flx">
         <input type="submit" name="submit" value="update">
-      </div>
-      <div class="image flx">
-        <img src="assets/flags/MA.svg" alt="">
+        <input type="reset" class="alter-btn-close" name="reset" value="cancel">
       </div>
     </form>
-  </div>
+    </dialog>
+  
   <!-- END POP UPS -->
   <!-- START MAIN CONTAINER -->
   <div class=" main-container flx">
@@ -83,7 +90,6 @@
       
     </div>
     <!-- END DASHBOARD -->
-
     <!-- START CONTENT -->
     <div class="row content py-1 px-2">
       <!-- START HEADER -->
@@ -106,7 +112,7 @@
         </div>
         <div class="profile row flx ">
           <i class=" logo fa fa-solid fa-user-circle fa-2x"></i>
-          <i class="chevron fa fa-chevron-down" aria-hidden="true"></i>
+          <i class="chevron login-btn fa fa-chevron-down" aria-hidden="true"></i>
         </div>
       </header>
       <!-- END HEADER -->
@@ -308,8 +314,8 @@
             <tr>
               <td>Flag</td>
               <td>Country</td>
-              <td>Alpha 2</td>
-              <td>Alpha 3</td>
+              <td>ISO code</td>
+              <td>Code</td>
               <td>Population</td>
               <td>Capital</td>
               <td></td>
@@ -317,165 +323,221 @@
             <tr>
               <td><img src="./assets/flags/MA.svg" alt=""></td>
               <td>Morocco</td>
-              <td>MA</td>
-              <td>MAR</td>
+              <td>MA - MAR</td>
+              <td>571</td>
               <td>37125468</td>
               <td>Rabat</td>
               <td>
-                <i class="fa fa-solid fa-ellipsis"></i>
+                <i data-contry="MA" class="fa alter-btn fa-solid fa-ellipsis"></i>
               </td>
             </tr>
             <tr>
               <td><img src="./assets/flags/MA.svg" alt=""></td>
               <td>Morocco</td>
-              <td>MA</td>
-              <td>MAR</td>
+              <td>MA - MAR</td>
+              <td>571</td>
               <td>37125468</td>
               <td>Rabat</td>
               <td>
-                <i class="fa fa-solid fa-ellipsis"></i>
+                <i data-contry="MA" class="fa alter-btn fa-solid fa-ellipsis"></i>
               </td>
             </tr>
             <tr>
               <td><img src="./assets/flags/MA.svg" alt=""></td>
               <td>Morocco</td>
-              <td>MA</td>
-              <td>MAR</td>
+              <td>MA - MAR</td>
+              <td>571</td>
               <td>37125468</td>
               <td>Rabat</td>
               <td>
-                <i class="fa fa-solid fa-ellipsis"></i>
+                <i data-contry="MA" class="fa alter-btn fa-solid fa-ellipsis"></i>
               </td>
             </tr>
             <tr>
               <td><img src="./assets/flags/MA.svg" alt=""></td>
               <td>Morocco</td>
-              <td>MA</td>
-              <td>MAR</td>
+              <td>MA - MAR</td>
+              <td>571</td>
               <td>37125468</td>
               <td>Rabat</td>
               <td>
-                <i class="fa fa-solid fa-ellipsis"></i>
+                <i data-contry="MA" class="fa alter-btn fa-solid fa-ellipsis"></i>
               </td>
             </tr>
             <tr>
               <td><img src="./assets/flags/MA.svg" alt=""></td>
               <td>Morocco</td>
-              <td>MA</td>
-              <td>MAR</td>
+              <td>MA - MAR</td>
+              <td>571</td>
               <td>37125468</td>
               <td>Rabat</td>
               <td>
-                <i class="fa fa-solid fa-ellipsis"></i>
+                <i data-contry="MA" class="fa alter-btn fa-solid fa-ellipsis"></i>
               </td>
             </tr>
             <tr>
               <td><img src="./assets/flags/MA.svg" alt=""></td>
               <td>Morocco</td>
-              <td>MA</td>
-              <td>MAR</td>
+              <td>MA - MAR</td>
+              <td>571</td>
               <td>37125468</td>
               <td>Rabat</td>
               <td>
-                <i class="fa fa-solid fa-ellipsis"></i>
+                <i data-contry="MA" class="fa alter-btn fa-solid fa-ellipsis"></i>
               </td>
             </tr>
             <tr>
               <td><img src="./assets/flags/MA.svg" alt=""></td>
               <td>Morocco</td>
-              <td>MA</td>
-              <td>MAR</td>
+              <td>MA - MAR</td>
+              <td>571</td>
               <td>37125468</td>
               <td>Rabat</td>
               <td>
-                <i class="fa fa-solid fa-ellipsis"></i>
+                <i data-contry="MA" class="fa alter-btn fa-solid fa-ellipsis"></i>
               </td>
             </tr>
             <tr>
               <td><img src="./assets/flags/MA.svg" alt=""></td>
               <td>Morocco</td>
-              <td>MA</td>
-              <td>MAR</td>
+              <td>MA - MAR</td>
+              <td>571</td>
               <td>37125468</td>
               <td>Rabat</td>
               <td>
-                <i class="fa fa-solid fa-ellipsis"></i>
+                <i data-contry="MA" class="fa alter-btn fa-solid fa-ellipsis"></i>
               </td>
             </tr>
             <tr>
               <td><img src="./assets/flags/MA.svg" alt=""></td>
               <td>Morocco</td>
-              <td>MA</td>
-              <td>MAR</td>
+              <td>MA - MAR</td>
+              <td>571</td>
               <td>37125468</td>
               <td>Rabat</td>
               <td>
-                <i class="fa fa-solid fa-ellipsis"></i>
+                <i data-contry="MA" class="fa alter-btn fa-solid fa-ellipsis"></i>
               </td>
             </tr>
             <tr>
               <td><img src="./assets/flags/MA.svg" alt=""></td>
               <td>Morocco</td>
-              <td>MA</td>
-              <td>MAR</td>
+              <td>MA - MAR</td>
+              <td>571</td>
               <td>37125468</td>
               <td>Rabat</td>
               <td>
-                <i class="fa fa-solid fa-ellipsis"></i>
+                <i data-contry="MA" class="fa alter-btn fa-solid fa-ellipsis"></i>
               </td>
             </tr>
             <tr>
               <td><img src="./assets/flags/MA.svg" alt=""></td>
               <td>Morocco</td>
-              <td>MA</td>
-              <td>MAR</td>
+              <td>MA - MAR</td>
+              <td>571</td>
               <td>37125468</td>
               <td>Rabat</td>
               <td>
-                <i class="fa fa-solid fa-ellipsis"></i>
+                <i data-contry="MA" class="fa alter-btn fa-solid fa-ellipsis"></i>
               </td>
             </tr>
             <tr>
               <td><img src="./assets/flags/MA.svg" alt=""></td>
               <td>Morocco</td>
-              <td>MA</td>
-              <td>MAR</td>
+              <td>MA - MAR</td>
+              <td>571</td>
               <td>37125468</td>
               <td>Rabat</td>
               <td>
-                <i class="fa fa-solid fa-ellipsis"></i>
-              </td>
-            </tr><tr>
-              <td><img src="./assets/flags/MA.svg" alt=""></td>
-              <td>Morocco</td>
-              <td>MA</td>
-              <td>MAR</td>
-              <td>37125468</td>
-              <td>Rabat</td>
-              <td>
-                <i class="fa fa-solid fa-ellipsis"></i>
+                <i data-contry="MA" class="fa alter-btn fa-solid fa-ellipsis"></i>
               </td>
             </tr>
             <tr>
               <td><img src="./assets/flags/MA.svg" alt=""></td>
               <td>Morocco</td>
-              <td>MA</td>
-              <td>MAR</td>
+              <td>MA - MAR</td>
+              <td>571</td>
               <td>37125468</td>
               <td>Rabat</td>
               <td>
-                <i class="fa fa-solid fa-ellipsis"></i>
+                <i data-contry="MA" class="fa alter-btn fa-solid fa-ellipsis"></i>
               </td>
             </tr>
             <tr>
               <td><img src="./assets/flags/MA.svg" alt=""></td>
               <td>Morocco</td>
-              <td>MA</td>
-              <td>MAR</td>
+              <td>MA - MAR</td>
+              <td>571</td>
               <td>37125468</td>
               <td>Rabat</td>
               <td>
-                <i class="fa fa-solid fa-ellipsis"></i>
+                <i data-contry="MA" class="fa alter-btn fa-solid fa-ellipsis"></i>
+              </td>
+            </tr>
+            <tr>
+              <td><img src="./assets/flags/MA.svg" alt=""></td>
+              <td>Morocco</td>
+              <td>MA - MAR</td>
+              <td>571</td>
+              <td>37125468</td>
+              <td>Rabat</td>
+              <td>
+                <i data-contry="MA" class="fa alter-btn fa-solid fa-ellipsis"></i>
+              </td>
+            </tr>
+            <tr>
+              <td><img src="./assets/flags/MA.svg" alt=""></td>
+              <td>Morocco</td>
+              <td>MA - MAR</td>
+              <td>571</td>
+              <td>37125468</td>
+              <td>Rabat</td>
+              <td>
+                <i data-contry="MA" class="fa alter-btn fa-solid fa-ellipsis"></i>
+              </td>
+            </tr>
+            <tr>
+              <td><img src="./assets/flags/MA.svg" alt=""></td>
+              <td>Morocco</td>
+              <td>MA - MAR</td>
+              <td>571</td>
+              <td>37125468</td>
+              <td>Rabat</td>
+              <td>
+                <i data-contry="MA" class="fa alter-btn fa-solid fa-ellipsis"></i>
+              </td>
+            </tr>
+            <tr>
+              <td><img src="./assets/flags/MA.svg" alt=""></td>
+              <td>Morocco</td>
+              <td>MA - MAR</td>
+              <td>571</td>
+              <td>37125468</td>
+              <td>Rabat</td>
+              <td>
+                <i data-contry="MA" class="fa alter-btn fa-solid fa-ellipsis"></i>
+              </td>
+            </tr>
+            <tr>
+              <td><img src="./assets/flags/MA.svg" alt=""></td>
+              <td>Morocco</td>
+              <td>MA - MAR</td>
+              <td>571</td>
+              <td>37125468</td>
+              <td>Rabat</td>
+              <td>
+                <i data-contry="MA" class="fa alter-btn fa-solid fa-ellipsis"></i>
+              </td>
+            </tr>
+            <tr>
+              <td><img src="./assets/flags/MA.svg" alt=""></td>
+              <td>Morocco</td>
+              <td>MA - MAR</td>
+              <td>571</td>
+              <td>37125468</td>
+              <td>Rabat</td>
+              <td>
+                <i data-contry="MA" class="fa alter-btn fa-solid fa-ellipsis"></i>
               </td>
             </tr>
           </table>
@@ -491,38 +553,206 @@
             <i class="fa fa-solid fa-magnifying-glass"></i>
           </label>
         </div>
-          <div class="box flx ">
-            <h1>Morocco</h1>
-          <img src="assets/flags/MA.svg" alt="" srcset="">
-          <ul class="details">
-            <li><strong>Name:</strong> <span class="name">Morocco</span></li>
-            <li><strong>Capital:</strong> <span class="capital">Rabat</span></li>
-            <li><strong>Population:</strong> <span class="population">37015411</span></li>
-            <li><strong>Region:</strong> <span class="region">Africa</span></li>
-            <li><strong>Subregion:</strong> <span class="subregion">North-Arfica</span></li>
-            <li><strong>Timezones:</strong> <span class="timezones">UTC+1</span></li>
-            <li><strong>Currencies:</strong> <span class="currencies">MAD</span></li>
-            <li><strong>Languages:</strong> <span class="languages">Arabic</span></li>
-            <li><strong>alpha-2:</strong> <span class="alpha-2">MA</span></li>
-            <li><strong>Calling Code:</strong> <span class="calling">212</span></li>
-          </ul>
+          <div class="boxes scroll grid ">
+            <div class="box py-1 px-1 flx-c flx">
+              <h1>Morocco
+                <span class="outer" aria-hidden="true">
+                  <span class="inner">Morocco</span> 
+                </span>  
+              </h1>
+              <img src="assets/flags/MA.svg" alt="" srcset="">
+            </div>
+            <div class="box flx py-1 px-1 flx-c">
+              <div class="mapCountry" id="mapCountry">
+
+              </div>
+            </div>
+            <div class="box py-1 px-1 flx-c">
+              <ul class="details scroll">
+                <li><strong>Name:</strong> <span class="name">Morocco</span></li>
+                <li><strong>Capital:</strong> <span class="capital">Rabat</span></li>
+                <li><strong>Population:</strong> <span class="population">37015411</span></li>
+                <li><strong>Region:</strong> <span class="region">Africa</span></li>
+                <li><strong>Subregion:</strong> <span class="subregion">North-Arfica</span></li>
+                <li><strong>Timezones:</strong> <span class="timezones">UTC+1</span></li>
+                <li><strong>Currencies:</strong> <span class="currencies">MAD</span></li>
+                <li><strong>Languages:</strong> <span class="languages">Arabic</span></li>
+                <li><strong>ISO code:</strong> <span class="alpha-2">MA</span></li>
+                <li><strong>Calling Code:</strong> <span class="calling">212</span></li>
+              </ul>
+            </div>
+            <div class="box py-1 px-1 flx-c">
+              <h3>Export Data</h3>
+              <div class="buttons flx flx-c">
+                <button data-type="PDF" class="export">
+                PDF
+              </button>
+              <button data-type="CSV" class="export">
+                CSV
+              </button>
+              <button data-type="JSON" class="export">
+                JSON
+              </button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
       <!-- END STATISTICS -->
       <!-- START SETTINGS-->
-      <section data-cap="settings" class="settings">
-        settings
+      <section data-cap="settings" class="settings px-1 py-1">
+        <div class="container scroll">
+          <h1>General settings</h1>            
+            <div class="section password-reset">
+            <h3>Password Reset</h3>
+            <form>
+              <div class="form-group">
+                <label for="current-password">Current Password:</label>
+                <input type="password" id="current-password" required>
+              </div>
+              <div class="form-group">
+                <label for="new-password">New Password:</label>
+                <input type="password" id="new-password" required>
+              </div>
+              <div class="form-group">
+                <button type="submit" id="reset-password">Reset Password</button>
+              </div>
+            </form>
+            </div>
+            <div class="section two-factor-auth">
+            <h3>Two-Factor Authentication</h3>
+            <div class="form-group">
+              <label class="switch" for="enable-2fa">
+                <input type="checkbox" id="enable-2fa">
+                <span class="slider round"></span>
+              </label>
+              <label for="enable-2fa">Enable 2FA</label>
+            </div>
+            </div>
+            <div class="section login-history">
+            <h3>Login History</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Location</th>
+                  <th>Device</th>
+                </tr>
+              </thead>
+              <tbody id="login-history-rows">
+                <tr>
+                  <td>May 1, 2023</td>
+                  <td>10:30 AM</td>
+                  <td>New York, NY</td>
+                  <td>MacBook Pro</td>
+                </tr>
+                <tr>
+                  <td>May 2, 2023</td>
+                  <td>3:15 PM</td>
+                  <td>San Francisco, CA</td>
+                  <td>iPhone X</td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+        
+            <div class="section account-recovery">
+            <h3>Account Recovery</h3>
+            <form>
+              <div class="form-group">
+                <label for="phone-number">Phone Number:</label>
+                <input type="text" id="phone-number" disabled>
+              </div>
+              <div class="form-group">
+                <label for="email-address">Email Address:</label>
+                <input type="email" id="email-address" required>
+              </div>
+              <div class="form-group">
+                <button type="submit" id="update-recovery">Update Recovery Options</button>
+              </div>
+              </form>
+            </div>
+            </div>
       </section>
       <!-- END SETTINGS -->
       <!-- START ABOUT US-->
-      <section data-cap="aboutus" class="aboutus">
-        aboutus
+      <section data-cap="aboutus" class="aboutus scroll">
+        <h1><span>OUR</span> STORY</h1>
+        <div class="rows grid ">
+          <div class="row-set flx flx-c">
+            <div class=" flx row py-1 px-1">
+          <img src="assets/illustrations/World Connection _Flatline.svg" alt="" srcset="">
+          <p>At our core, we are a hardworking team passionate about bringing data and knowledge to the forefront. Founded by a sole student, we began with a simple idea: to create a platform where users can easily explore and visualize data related to world countries. </p>
+            </div>
+            <div class=" flx row py-1 px-1">
+          <img src="assets/illustrations/Analytics team_Monochromatic.svg" alt="">
+          <p>We started small, researching and gathering data from various sources, and gradually built a platform that is both informative and engaging. Our team members come from diverse backgrounds, each bringing unique skills and perspectives to the table.</p>
+            </div>
+          </div>
+          <div class="row-set flx flx-c">
+            <div class=" flx row py-1 px-1">
+          <img src="assets/illustrations/Data analytics _Monochromatic.svg" alt="">
+          <p>
+            As we continue to grow and evolve, our mission remains the same: to provide a powerful tool that helps users better understand and appreciate the world around them. We are committed to constantly improving our platform and providing the best possible experience for our users. 
+          </p>
+            </div>
+            <div class=" flx row py-1 px-1">
+          <img src="assets/illustrations/Analytics process_Isometric.svg" alt="">
+          <p>
+            Join us on this exciting journey as we explore the rich diversity of our world's countries, and discover new insights and perspectives along the way.
+          </p>
+            </div>
+          </div>
+        </div>
+        <div class="callbtn flx">
+          <a href="#" data-text1="Let's Talk" data-text2="Talk Now"></a>
+        </div>
       </section>
       <!-- END ABOUT US -->
       <!-- START CONTACT US-->
-      <section data-cap="contactus" class="contactus">
-        contactus
+      <section data-cap="contactus" class="contactus scroll flx flx-c ">
+        <div class="head flx flx-c px-1 py-1">
+          <h1>Contact Us</h1>
+          <h4>Any question or remarks? Just write us a message!</h4>
+        </div>
+        <div class="rows grid">
+          <div class="row py-1 px-2 info flx flx-c">
+            <div class="ti">
+              <h2>Contact Information</h2>
+            <p>
+              fill up the form and our team will get back to you within 24 hours.
+            </p>
+            </div>
+            <ul class="infos">
+              <li><i class="fa fa-solid fa-phone"></i><span>+2126 27 04 92 64</span></li>
+              <li><i class="fa fa-solid fa-envelope"></i><span>bouarourayoub0@gmail.com</span></li>
+              <li><i class="fa fa-solid fa-location-dot"></i><span>Morocco , Oujda UMP</span></li>
+            </ul>
+            <ul class="social flx ">
+              <li><i class="fa fa-brands fa-facebook-f"></i></li>
+              <li><i class="fa fa-brands fa-instagram"></i></li>
+              <li><i class="fa fa-brands fa-twitter"></i></li>
+              <li><i class="fa fa-brands fa-linkedin-in"></i></li>
+              <li><i class="fa fa-brands fa-github-alt"></i></li>
+            </ul>
+          </div>
+          <form class=" row contact py-1 px-1 flx flx-c">
+            <label data-content="First Name :" for="firstnameC">
+              <input id="firstnameC" type="text"  placeholder="John" name="firstName">
+            </label>
+            <label data-content="Last Name :"  for="lastnameC">
+              <input id="lastnameC" type="text" placeholder="Doe" name="lastName">
+            </label>
+            <label data-content="Email :"  for="emailC">
+              <input id="emailC" type="email" placeholder="exemple@exemple.exemple" name="email">
+            </label>
+            <label data-content="Message :" for="messageC">
+              <textarea id="messageC" name="message"  placeholder="Something..." name="message" id="" cols="30" rows="10"></textarea>
+            </label>
+            <button class="send" type="submit"  value="Send Message" name="submit">Send Message</button>
+          </form>
+        </div>
       </section>
       <!-- END CONTACT US -->
       </div>
@@ -532,6 +762,7 @@
   </div>
   <!-- END MAIN CONTENT -->
   <!-- START SCRIPTS -->
+  
   <script src="js/main.js"></script>
   <!-- END SCRIPTS -->
 </body>

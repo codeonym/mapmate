@@ -6,14 +6,18 @@ onload = () => {
 
   const tootip = document.querySelector(".tooltip");
 
-  const popupContainer = document.querySelector(".popup-container");
-
   const sections = document.querySelectorAll(".content section");
 
   const dashboardLinks = document.querySelectorAll(".dashboard ul.links li");
-
   const modeSwitch = document.querySelector(".mode");
 
+  const loginBtn = document.querySelector(".login-btn");
+  const loginBtnClose = document.querySelector(".login-btn-close");
+  const loginModal = document.querySelector(".login-modal");
+
+  const alterBtns = document.querySelectorAll(".alter-btn");
+  const alterBtnClose = document.querySelector(".alter-btn-close");
+  const alterModal = document.querySelector(".alter-modal");
   // const popup = document.querySelectorAll(".popup-container .popup");
 
   // DECLARE GLOBAL VARS
@@ -30,16 +34,6 @@ onload = () => {
       tootip.innerHTML = country.getAttribute("name") ?? (country.getAttribute("class") ?? "country");
     })
   });
-
-  // HANDLING POP UPS
-  popupContainer.addEventListener("click", (e) => {
-    // popup.foreach((entry) => {
-    //   entry.classList.remove("open");
-    // })
-    console.log(e.target);
-    if(e.target === popupContainer)
-      popupContainer.classList.remove("open");
-  })
 
   // SETTING CLOCK
   function updateTime() {
@@ -63,7 +57,7 @@ onload = () => {
 
   // first call 
   updateTime();
-  // upàdate clock after 1s
+  // update clock after 1s
 		setInterval(updateTime, 1000);
 
   // NAVIGATION
@@ -88,4 +82,39 @@ onload = () => {
   modeSwitch.addEventListener('click', (e) => {
     modeSwitch.classList.toggle("dark");
   });
+
+  // HANDLING POPUPS / MODALS
+
+  // LOGIN DIALOG MODAL
+  loginBtn.addEventListener('click', e => loginModal.showModal());
+  loginBtnClose.addEventListener('click', e => loginModal.close());
+
+  // ALTER COUNTRIES MODAL
+  alterBtns.forEach((btn) => {
+    btn.addEventListener('click', e => alterModal.showModal())
+  } );
+  alterBtnClose.addEventListener('click', e => alterModal.close());
+
+  // GET MAP
+  var vectorLayer = new ol.layer.Vector({
+            source: new ol.source.Vector({
+                url: 'https://raw.githubusercontent.com/mledoze/countries/master/mar.geo.json',
+                format: new ol.format.GeoJSON()
+            })
+        });
+
+        var map = new ol.Map({
+            target: 'mapCountry',
+            layers: [
+                new ol.layer.Tile({
+                    source: new ol.source.OSM()
+                }),
+                vectorLayer
+            ],
+            view: new ol.View({
+                center: ol.proj.fromLonLat([-7.6, 31.8]),
+                zoom: 6
+            })
+        });
+
 }
