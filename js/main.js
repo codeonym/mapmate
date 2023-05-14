@@ -1,3 +1,25 @@
+// FUNCTIONS
+
+// NAVIGATION FUNCTION
+function navigate(links,elements) {
+  links.forEach((link) => {
+    link.addEventListener("click", (e) => {
+      console.log(link.dataset.cap);
+      elements.forEach((entry) => {
+        if (entry.dataset.cap === link.dataset.cap) {
+          entry.classList.add("open");
+          links.forEach((link) => {
+            link.classList.remove("selected");
+          });
+          link.classList.add("selected");
+        } else {
+          entry.classList.remove("open");
+        }
+      });
+    })
+  });
+}
+
 onload = () => {
   // SELECT ELEMENTS
   const dashboardCloser = document.querySelector(".closer");
@@ -7,9 +29,12 @@ onload = () => {
   const tootip = document.querySelector(".tooltip");
 
   const sections = document.querySelectorAll(".content section");
+  const dashboardLinks = document.querySelectorAll(".dashboard ul.links li:not(.logout)");
 
-  const dashboardLinks = document.querySelectorAll(".dashboard ul.links li");
   const modeSwitch = document.querySelector(".mode");
+
+  const profileChevron = document.querySelector(".content header .profile .chevron");
+  const profileExpand = document.querySelector(".content header .profile .expand");
 
   const loginBtn = document.querySelector(".login-btn");
   const loginBtnClose = document.querySelector(".login-btn-close");
@@ -18,7 +43,11 @@ onload = () => {
   const alterBtns = document.querySelectorAll(".alter-btn");
   const alterBtnClose = document.querySelector(".alter-btn-close");
   const alterModal = document.querySelector(".alter-modal");
-  // const popup = document.querySelectorAll(".popup-container .popup");
+
+  const settingsLinks = document.querySelectorAll(".settings .rows .links li");
+  const settingsSections = document.querySelectorAll(".settings .rows .confs .section");
+
+  const searchCountryBars = document.querySelectorAll(".search-country");
 
   // DECLARE GLOBAL VARS
 
@@ -27,6 +56,12 @@ onload = () => {
   dashboardCloser.addEventListener('click', () => {
     dashboardCloser.closest(".dashboard").classList.toggle("close");
   });
+
+  // profile Expanding
+  profileChevron.addEventListener("click", () => {
+    profileExpand.classList.toggle("open");
+    profileChevron.classList.toggle("clicked");
+  })
 
   // CUSTOMIZING COUNTRIES HOVER EFFECT
   worldmapCountries.forEach((country) => {
@@ -61,22 +96,8 @@ onload = () => {
 		setInterval(updateTime, 1000);
 
   // NAVIGATION
-  dashboardLinks.forEach((link) => {
-    link.addEventListener("click", (e) => {
-      console.log(link.dataset.cap);
-      sections.forEach((entry) => {
-        if (entry.dataset.cap === link.dataset.cap) {
-          entry.classList.add("open");
-          dashboardLinks.forEach((link) => {
-            link.classList.remove("selected");
-          });
-          link.classList.add("selected");
-        } else {
-          entry.classList.remove("open");
-        }
-      });
-    })
-  });
+  navigate(dashboardLinks,sections);
+  navigate(settingsLinks,settingsSections);
 
   // MODE SWITCHER
   modeSwitch.addEventListener('click', (e) => {
@@ -95,26 +116,35 @@ onload = () => {
   } );
   alterBtnClose.addEventListener('click', e => alterModal.close());
 
+  // SEARCH BARS
+  searchCountryBars.forEach((searchbar) => {
+    searchbar.addEventListener("input", () => {
+      searchbar.closest(".search").classList.add("open");
+    });
+    searchbar.addEventListener("blur", () => {
+      searchbar.closest(".search").classList.remove("open");
+    });
+  });
+  
   // GET MAP
   var vectorLayer = new ol.layer.Vector({
-            source: new ol.source.Vector({
-                url: 'https://raw.githubusercontent.com/mledoze/countries/master/mar.geo.json',
-                format: new ol.format.GeoJSON()
-            })
-        });
+      source: new ol.source.Vector({
+          url: 'https://raw.githubusercontent.com/mledoze/countries/master/mar.geo.json',
+          format: new ol.format.GeoJSON()
+      })
+  });
 
-        var map = new ol.Map({
-            target: 'mapCountry',
-            layers: [
-                new ol.layer.Tile({
-                    source: new ol.source.OSM()
-                }),
-                vectorLayer
-            ],
-            view: new ol.View({
-                center: ol.proj.fromLonLat([-7.6, 31.8]),
-                zoom: 6
-            })
-        });
-
+  var map = new ol.Map({
+      target: 'mapCountry',
+      layers: [
+          new ol.layer.Tile({
+              source: new ol.source.OSM()
+          }),
+          vectorLayer
+      ],
+      view: new ol.View({
+          center: ol.proj.fromLonLat([-7.6, 31.8]),
+          zoom: 6
+      })
+  });
 }

@@ -84,7 +84,7 @@
           <li data-cap="settings" class="flx"><i class="fa fa-gear"></i><a href="#">Settings</a></li>
           <li data-cap="aboutus" class="flx"><i class="fa fa-mug-hot"></i><a href="#">About Us</a></li>
           <li data-cap="contactus" class="flx"><i class="fa fa-solid fa-paper-plane"></i><a href="#">Contact Us</a></li>
-          <li data-cap="logout" class="flx"><i class="fa fa-solid fa-arrow-right-from-bracket"></i><a href="#">Logout</a></li>
+          <li data-cap="logout" class="flx logout"><i class="fa fa-solid fa-arrow-right-from-bracket"></i><a href="#">Logout</a></li>
         </ul>
       </div>
       
@@ -105,14 +105,52 @@
           <button class="mode  bbn flx">
             <span></span>
           </button>
-          <form action="" class="search flx"> 
-            <input class=" text-center"type="text" name="" id="">
-            <button class="go  flx "type="submit" value="search"><i class="fa fa-solid fa-magnifying-glass"></i></button>
-          </form>
+          <div action="" class="search flx"> 
+            <input class=" text-center search-country"type="text" name="" id="">
+            <button class="go flx " value="search"><i class="fa fa-solid fa-magnifying-glass"></i></button>
+            <div class="results flx">
+              <div class="container scroll">
+                <div data-iso="MA" class="country flx">
+                  <img src="assets/flags/MA.svg" alt="">
+                  <span>Morocco</span>
+                </div>
+                <div data-iso="MA" class="country flx">
+                  <img src="assets/flags/MA.svg" alt="">
+                  <span>Morocco</span>
+                </div>
+                <div data-iso="MA" class="country flx">
+                  <img src="assets/flags/MA.svg" alt="">
+                  <span>Morocco</span>
+                </div>
+                <div data-iso="MA" class="country flx">
+                  <img src="assets/flags/MA.svg" alt="">
+                  <span>Morocco</span>
+                </div>
+                <div data-iso="MA" class="country flx">
+                  <img src="assets/flags/MA.svg" alt="">
+                  <span>Morocco</span>
+                </div>
+                <div data-iso="MA" class="country flx">
+                  <img src="assets/flags/MA.svg" alt="">
+                  <span>Morocco</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="profile row flx ">
-          <i class=" logo fa fa-solid fa-user-circle fa-2x"></i>
-          <i class="chevron login-btn fa fa-chevron-down" aria-hidden="true"></i>
+          <div class="pic">
+            <img src="assets/avatars/avatar01.png" alt="">
+          </div>
+          <i class="chevron fa fa-chevron-down" aria-hidden="true"></i>
+          <div class="expand px-1 py-1 flx flx-c">
+            <div class="login-btn"><i class="fa fa-solid fa-arrow-right-to-bracket"></i><span>Login</span></div>
+            <ul class="opt">
+              <li><i class="fa fa-solid fa-user-alt"></i><span>kiraxdesu</span></li>
+              <li><i class="fa fa-solid fa-gear"></i><span>Settings</span></li>
+              <li><i class="fa fa-solid fa-arrow-right-from-bracket"></i><span>Logout</span></li>
+            </ul>
+          </div>
         </div>
       </header>
       <!-- END HEADER -->
@@ -547,11 +585,39 @@
       <!-- START STATISTICS-->
       <section data-cap="statistics" class="statistics">
         <div class="container flx flx-c py-1 px-1">
-          <div class="searchbar flx">
+          <div class="searchbar search flx">
           <label class="flx" for="searchCountry">
-            <input type="text" placeholder="Search Country"name="" id="searchCountry">
+            <input class="search-country" type="text" placeholder="Search Country"name="" id="searchCountry">
             <i class="fa fa-solid fa-magnifying-glass"></i>
           </label>
+          <div class="results flx">
+              <div class="container scroll">
+                <div data-iso="MA" class="country flx">
+                  <img src="assets/flags/MA.svg" alt="">
+                  <span>Morocco</span>
+                </div>
+                <div data-iso="MA" class="country flx">
+                  <img src="assets/flags/MA.svg" alt="">
+                  <span>Morocco</span>
+                </div>
+                <div data-iso="MA" class="country flx">
+                  <img src="assets/flags/MA.svg" alt="">
+                  <span>Morocco</span>
+                </div>
+                <div data-iso="MA" class="country flx">
+                  <img src="assets/flags/MA.svg" alt="">
+                  <span>Morocco</span>
+                </div>
+                <div data-iso="MA" class="country flx">
+                  <img src="assets/flags/MA.svg" alt="">
+                  <span>Morocco</span>
+                </div>
+                <div data-iso="MA" class="country flx">
+                  <img src="assets/flags/MA.svg" alt="">
+                  <span>Morocco</span>
+                </div>
+              </div>
+            </div>
         </div>
           <div class="boxes scroll grid ">
             <div class="box py-1 px-1 flx-c flx">
@@ -601,79 +667,88 @@
       <!-- END STATISTICS -->
       <!-- START SETTINGS-->
       <section data-cap="settings" class="settings px-1 py-1">
-        <div class="container scroll">
+        <div class="container flx flx-c scroll">
           <h1>General settings</h1>            
-            <div class="section password-reset">
-            <h3>Password Reset</h3>
-            <form>
-              <div class="form-group">
-                <label for="current-password">Current Password:</label>
-                <input type="password" id="current-password" required>
+          <div class="rows flx">
+            <ul class="links row">
+              <li class="flx" data-cap="password-reset"><i class="fa fa-solid fa-key"></i><span>Reset password</span></li>
+              <li class="flx" data-cap="two-factor-auth"><i class="fa fa-solid fa-shield-halved"></i><span>Two factor authentication</span></li>
+              <li class="flx" data-cap="login-history"><i class="fa fa-solid fa-user-clock"></i><span>Login history</span></li>
+              <li class="flx" data-cap="account-recovery"><i class="fa fa-solid fa-rotate"></i><span>Account recovery</span></li>
+            </ul>
+            <div class="row confs scroll flx">
+              <div data-cap="password-reset" class="section password-reset">
+                <h3>Password Reset</h3>
+                <form>
+                  <div class="form-group">
+                    <label for="current-password">Current Password:</label>
+                    <input type="password" id="current-password" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="new-password">New Password:</label>
+                    <input type="password" id="new-password" required>
+                  </div>
+                  <div class="form-group">
+                    <button type="submit" id="reset-password">Reset Password</button>
+                  </div>
+                </form>
               </div>
-              <div class="form-group">
-                <label for="new-password">New Password:</label>
-                <input type="password" id="new-password" required>
+              <div data-cap="two-factor-auth" class="section two-factor-auth">
+                <h3>Two-Factor Authentication</h3>
+                <div class="form-group">
+                  <label class="switch" for="enable-2fa">
+                    <input type="checkbox" id="enable-2fa">
+                    <span class="slider round"></span>
+                  </label>
+                  <label for="enable-2fa">Enable 2FA</label>
+                </div>
               </div>
-              <div class="form-group">
-                <button type="submit" id="reset-password">Reset Password</button>
+              <div data-cap="login-history" class="section login-history">
+                <h3>Login History</h3>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Time</th>
+                      <th>Location</th>
+                      <th>Device</th>
+                    </tr>
+                  </thead>
+                  <tbody id="login-history-rows">
+                    <tr>
+                      <td>May 1, 2023</td>
+                      <td>10:30 AM</td>
+                      <td>New York, NY</td>
+                      <td>MacBook Pro</td>
+                    </tr>
+                    <tr>
+                      <td>May 2, 2023</td>
+                      <td>3:15 PM</td>
+                      <td>San Francisco, CA</td>
+                      <td>iPhone X</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
-            </form>
-            </div>
-            <div class="section two-factor-auth">
-            <h3>Two-Factor Authentication</h3>
-            <div class="form-group">
-              <label class="switch" for="enable-2fa">
-                <input type="checkbox" id="enable-2fa">
-                <span class="slider round"></span>
-              </label>
-              <label for="enable-2fa">Enable 2FA</label>
-            </div>
-            </div>
-            <div class="section login-history">
-            <h3>Login History</h3>
-            <table>
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Time</th>
-                  <th>Location</th>
-                  <th>Device</th>
-                </tr>
-              </thead>
-              <tbody id="login-history-rows">
-                <tr>
-                  <td>May 1, 2023</td>
-                  <td>10:30 AM</td>
-                  <td>New York, NY</td>
-                  <td>MacBook Pro</td>
-                </tr>
-                <tr>
-                  <td>May 2, 2023</td>
-                  <td>3:15 PM</td>
-                  <td>San Francisco, CA</td>
-                  <td>iPhone X</td>
-                </tr>
-              </tbody>
-            </table>
-            </div>
-        
-            <div class="section account-recovery">
-            <h3>Account Recovery</h3>
-            <form>
-              <div class="form-group">
-                <label for="phone-number">Phone Number:</label>
-                <input type="text" id="phone-number" disabled>
+              <div data-cap="account-recovery" class="section account-recovery">
+              <h3>Account Recovery</h3>
+                <form>
+                  <div class="form-group">
+                    <label for="phone-number">Phone Number:</label>
+                    <input type="text" id="phone-number" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label for="email-address">Email Address:</label>
+                    <input type="email" id="email-address" required>
+                  </div>
+                  <div class="form-group">
+                    <button type="submit" id="update-recovery">Update Recovery Options</button>
+                  </div>
+                </form>
               </div>
-              <div class="form-group">
-                <label for="email-address">Email Address:</label>
-                <input type="email" id="email-address" required>
-              </div>
-              <div class="form-group">
-                <button type="submit" id="update-recovery">Update Recovery Options</button>
-              </div>
-              </form>
             </div>
-            </div>
+          </div>
+        </div>
       </section>
       <!-- END SETTINGS -->
       <!-- START ABOUT US-->
