@@ -1,0 +1,18 @@
+:root {
+  /* primary colors */
+  --col-primary-light:#13213c;
+  --col-primary-light-50:#13213c;
+  --col-primary-dark:#000000;
+  --col-primary-dark-50:#000000d0;
+
+  /* secondary colors */
+  --col-secondary-light:#ffffff;
+  --col-secondary-dark:#e5e5e5;
+
+  /* text colors */
+  --col-text-primary:#fff;
+  --col-text-primary-50:rgb(255 255 255 / 50%);
+  --col-text-dark:#13213c;
+  --col-text-secondary:#fff;
+
+}
