@@ -1,5 +1,27 @@
-// FUNCTIONS
 
+// FUNCTIONS
+// ======================== AJAX BLOCK =====================
+function fetchData() {
+  
+  $.ajax({
+    url: "/php/fetchdata.php",
+    method: "POST",
+    dataType: "json",
+    success: function(data) {
+        console.log(data);
+    },
+    error: function(xhr, status, error) {
+        console.log("An error occurred: " + error);
+    }
+});
+}
+
+
+
+
+
+
+// ================= END AJAX BLOCK ========================
 // NAVIGATION FUNCTION
 function navigate(links,elements) {
   links.forEach((link) => {
@@ -109,7 +131,7 @@ onload = () => {
   // LOGIN DIALOG MODAL
   loginBtn.addEventListener('click', e => loginModal.showModal());
   loginBtnClose.addEventListener('click', e => loginModal.close());
-  
+
   // ALTER COUNTRIES MODAL
   alterBtns.forEach((btn) => {
     btn.addEventListener('click', e => alterModal.showModal())
