@@ -11,7 +11,7 @@ function getStatistics() {
   try {
 
     // QUERY DECLARATION
-    $query="SELECT SUM(population) as totalPopulation ,COUNT(*) as totalPays FROM ".$_ENV["DB_COUNTRIES"];
+    $query="SELECT SUM(population) as totalPopulation ,COUNT(*) as totalPays , COUNT(DISTINCT timezone) as totalTimezones FROM ".$_ENV["DB_COUNTRIES"];
 
     // USING PDO PREPARED STATEMENT FOR FARTHER SECURITY
     $stmt=$pdo->prepare($query);
@@ -72,6 +72,5 @@ $data=array_merge($statistics,["countries" => $countries]);
 // ! --NOTICE USING JSON_HEX_TAG ENCODE <,> & REPLACE THEM WITH THEIR HEX ENTITIES--
 $response=json_encode($data,JSON_HEX_TAG);
 
-  echo "<pre>";
+// RETURNING THE RESPONSE IN JSON FORMAT 
   echo $response;
-  echo"</pre>";

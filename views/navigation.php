@@ -15,20 +15,20 @@
         </div>
       </div>
     </div>
-    <div class="card px-1 py-1 grid">
-      <div class="box flx flx-c py-1 px-1">
-        <h1>7884501200</h1>
+    <div class="card global-statistics px-1 py-1 grid">
+      <div class="box population flx flx-c py-1 px-1">
+        <h1></h1>
         <h3>Population</h3>
         
       </div>
-      <div class="box flx flx-c py-1 px-1">
-        <h1>266</h1>
+      <div class="box total-countries flx flx-c py-1 px-1">
+        <h1></h1>
         <h3>Total Countries</h3>
         
       </div>
-      <div class="box flx flx-c py-1 px-1">
-        <h1>6584</h1>
-        <h3>description</h3>
+      <div class="box total-timezones flx flx-c py-1 px-1">
+        <h1></h1>
+        <h3>total timezones</h3>
         
       </div>
       <div class="box flx flx-c py-1 px-1">
@@ -37,68 +37,21 @@
         
       </div>
     </div>
-    <div class="card  py-1">
+    <div class="card time-container py-1">
       <h3 class="px-1 py-1">Time</h3>
       <div class="table scroll">
         <table border="0" cellspacing="0" class="px-1 py-1">
         <tr>
-          <td>Index</td>
+          <td>iso code</td>
           <td>Country</td>
-          <td>Date</td>
+          <td>timezone</td>
           <td>Time</td>
         </tr>
-        <tr>
-          <td>1</td>
-          <td>morocco</td>
-          <td>22-01-2023</td>
-          <td>01:54 am</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>morocco</td>
-          <td>22-01-2023</td>
-          <td>01:54 am</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>morocco</td>
-          <td>22-01-2023</td>
-          <td>01:54 am</td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td>morocco</td>
-          <td>22-01-2023</td>
-          <td>01:54 am</td>
-        </tr>
-        <tr>
-          <td>5</td>
-          <td>morocco</td>
-          <td>22-01-2023</td>
-          <td>01:54 am</td>
-        </tr>
-        <tr>
-          <td>6</td>
-          <td>morocco</td>
-          <td>22-01-2023</td>
-          <td>01:54 am</td>
-        </tr>
-        <tr>
-          <td>7</td>
-          <td>morocco</td>
-          <td>22-01-2023</td>
-          <td>01:54 am</td>
-        </tr>
-        <tr>
-          <td>8</td>
-          <td>morocco</td>
-          <td>22-01-2023</td>
-          <td>01:54 am</td>
-        </tr>
+        
       </table>
       </div>
     </div>
-    <div class="card px-1 py-1">
+    <div class="card px-1 weather-container py-1">
       <h3 class="px-1 py-1">Weather</h3>
       <div class="table scroll">
         <table border="0" cellspacing="0" class="px-1 py-1">

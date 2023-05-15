@@ -11,7 +11,7 @@
       <span></span>
     </button>
     <div action="" class="search flx"> 
-      <input class=" text-center search-country"type="text" name="" id="">
+      <input class=" text-center search-country"type="text" name="">
       <button class="go flx " value="search"><i class="fa fa-solid fa-magnifying-glass"></i></button>
       <div class="results flx">
         <div class="container scroll">

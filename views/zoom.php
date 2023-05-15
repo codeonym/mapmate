@@ -1,8 +1,8 @@
 <section data-cap="statistics" class="statistics">
         <div class="container flx flx-c py-1 px-1">
           <div class="searchbar search flx">
-          <label class="flx" for="searchCountry">
-            <input class="search-country" type="text" placeholder="Search Country"name="" id="searchCountry">
+          <label class="flx" for="search-a-Country">
+            <input class="search-country" type="text" placeholder="Search Country"name="" id="search-a-Country">
             <i class="fa fa-solid fa-magnifying-glass"></i>
           </label>
           <div class="results flx">

@@ -10,7 +10,7 @@
       <li data-cap="worldmap" class="flx selected"><i class="fa fa-globe"></i><a href="#">World map</a></li>
       <li data-cap="navigation" class="flx"><i class="fa fa-map-location"></i><a href="#">Explore</a></li>
       <li data-cap="countries" class="flx"><i class="fa fa-solid fa-flag"></i><a href="#">Countries</a></li>
-      <li data-cap="statistics" class="flx"><i class="fa fa-solid fa-circle-info"></i><a href="#">zoom</a></li>
+      <li data-cap="statistics" id='zoom-country' class="flx"><i class="fa fa-solid fa-circle-info"></i><a href="#">zoom</a></li>
     </ul>
   <h4>Preferences</h4>
     <ul class="links flx flx-c">
