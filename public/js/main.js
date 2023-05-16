@@ -37,9 +37,12 @@ const navigationWeather = document.querySelector(".navigation .weather-container
 const searchInput = document.querySelector("#searchCountry");
 const sortSelect = document.querySelector(".sortby");
 
+const loginForm = document.querySelector("#loginForm");
 
 // GLOBAL VARS
 let countriesData = [];
+
+let authenticated = sessionStorage.getItem("authenticated") === "true";
 
 const apiKeyTimeZoneDb = 'EVJBG8P17IUE'; // Replace with your API key from TimezoneDB
 
@@ -61,9 +64,170 @@ function fetchData() {
   });
 }
 
+// AUTHENTICATION
+function authentication(userid,password) {
+  $.ajax({
+    url: "/MAPMATE/php/auth.php",
+    method: "POST",
+    dataType: "json",
+    data: {
+      "userid" : userid,
+      "password" : password
+    },
+    success: function (data) {
+      console.log(data);
+      if (data.success) {
+        location.reload();
+        sessionStorage.setItem("authenticated","true");
+        showPopupAlert('Login success', '#1bcfb4');
+      } else {
+        sessionStorage.removeItem("authenticated")
+        showPopupAlert('Login failed', '#fe9496');
+      }
+    },
+    error: function(xhr, status, error) {
+      console.log("An error occurred: " + error);
+    }
+  });
+}
 
+// LOGOUT 
+function logOut(){
+  $.ajax({
+    url: "/MAPMATE/php/logout.php",
+    method: "POST",
+    dataType: "json",
+    success: function (data) {
+      if (data.success) {
+        location.reload();
+        sessionStorage.removeItem("authenticated");
+      } else {
+        console.log("Error: you didn't logout ");
+      }
+    },
+    error: function(xhr, status, error) {
+      console.log("An error occurred: " + error);
+    }
+  });
 
+};
+
+// UPDATE COUNTRY 
+function updateCountry(iso,population,capital) {
+  $.ajax({
+    url: "/MAPMATE/php/updatecountry.php",
+    method: "POST",
+    dataType: "json",
+    data: {
+      "iso": iso,
+      "population": population,
+      "capital" :capital
+    },
+    success: function (data) {
+
+      // FETCH DATA
+      fetchData();
+
+      // CHECK UPDATE FOR CAPITAL
+      if (data.capital.executed) {
+        if (data.capital.success == true) {
+          showPopupAlert(data.capital.message, '#1bcfb4');
+        } else {
+          showPopupAlert(data.capital.message, '#fe9496');
+        }
+      }
+
+      // CHECK UPDATE FOR POPULATION
+      if (data.population.executed) {
+        if (data.population.success == true) {
+          showPopupAlert(data.population.message, '#1bcfb4');
+        } else {
+          showPopupAlert(data.population.message, '#fe9496');
+        }
+      }
+
+    },
+    error: function(xhr, status, error) {
+      console.log("An error occurred: " + error);
+    }
+  });
+}
+
+// UPDATE PASSWORD
+function updatePassword(newPassword,currentPassword) {
+  $.ajax({
+    url: "/MAPMATE/php/auth.php",
+    method: "POST",
+    dataType: "json",
+    data: {
+      "currentpassword" : currentPassword,
+      "newpassword" : newPassword
+    },
+    success: function (data) {
+      console.log(data);
+      if (data.success) {
+        location.reload();
+        sessionStorage.setItem("authenticated","true");
+        showPopupAlert('Login success', '#1bcfb4');
+      } else {
+        sessionStorage.removeItem("authenticated")
+        showPopupAlert('Login failed', '#fe9496');
+      }
+    },
+    error: function(xhr, status, error) {
+      console.log("An error occurred: " + error);
+    }
+  });
+}
 // ================= END AJAX BLOCK ========================
+function showPopupAlert(message , color) {
+  // Create the popup alert element
+  var popupAlert = $('<div>', {
+    id: 'popupAlert',
+    class: 'popup-alert',
+    text: message
+  });
+
+  // Set the initial styles
+  popupAlert.css({
+    position: 'absolute',
+    top: '10%',
+    left: '-100%',
+    transform: 'translateX(-100%)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: color,
+    color: '#fff',
+    width: '100%',
+    height: '100px',
+    padding: '10px',
+    borderRadius: '0px',
+    opacity: '0',
+    zIndex: '9999',
+    textAlign: 'center',
+  });
+
+  // Append the element to the body
+  $('body').append(popupAlert);
+
+  // Add animation effects
+  popupAlert.animate({
+    left: '100%',
+    opacity: '1'
+  }, 1000).delay(2000).animate({
+    left: '-100%',
+    opacity: '0'
+  }, 1000, function() {
+    // Animation complete
+    // Remove the element from the DOM
+    popupAlert.remove();
+  });
+}
+
+// Example usage:
+showPopupAlert('Login failed');
+
 
 // UPDATE UI 
 function updateUI() {
@@ -90,10 +254,103 @@ function navigate(links,elements) {
     })
   });
 }
+
+// SANITIZE INPUT 
+function sanitizeInput(input) {
+    
+  // CREATE A TEMP CONTAINER TO STORE THE INPUT
+    let tempElement = document.createElement("div");
+
+  // APPENDING THE ELEMENT TEXT NODE
+  tempElement.textContent = input;
+  
+  // ENCONDING ANY SPECIAL CHARS
+    return tempElement.innerHTML;
+  }
+
+// GET COUNTRY INFO
+async function getCountryInfo(countryCode) {
+  const url = `https://restcountries.com/v2/alpha/${countryCode}`;
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// UPDATING ZOOM SECTION
 function zoomCountry(iso, openSection = false) {
+  const countryZoomName = document.getElementById("country-zoom-name");
+  const countrZoomFlag = document.getElementById("country-zoom-flag");
+  const zoom_li_name = document.getElementById("zoom-li-name");
+  const zoom_li_capital = document.getElementById("zoom-li-capital");
+  const zoom_li_population = document.getElementById("zoom-li-population");
+  const zoom_li_region = document.getElementById("zoom-li-region");
+  const zoom_li_subregion = document.getElementById("zoom-li-subregion");
+  const zoom_li_timezones = document.getElementById("zoom-li-timezones");
+  const zoom_li_currencies = document.getElementById("zoom-li-currencies");
+  const zoom_li_languages = document.getElementById("zoom-li-languages");
+  const zoom_li_alpha2code = document.getElementById("zoom-li-alpha2code");
+  const zoom_li_calling = document.getElementById("zoom-li-calling");
+  const mapCountryContainer = document.getElementById("mapCountryContainer");
   if (openSection == true) {
     document.getElementById("zoom-country").click();
   }
+  if (iso == null) {
+    return null;
+  }
+  mapCountryContainer.innerHTML = `<div class="mapCountry" id="mapCountry"></div>`;
+  countryZoomName.innerHTML = '';
+  countrZoomFlag.innerHTML = '';
+  zoom_li_name.innerHTML = '';
+  zoom_li_capital.innerHTML = '';
+  zoom_li_population.innerHTML = '';
+  zoom_li_region.innerHTML = '';
+  zoom_li_subregion.innerHTML = '';
+  zoom_li_timezones.innerHTML = '';
+  zoom_li_currencies.innerHTML = '';
+  zoom_li_languages.innerHTML = '';
+  zoom_li_alpha2code.innerHTML = '';
+  zoom_li_calling.innerHTML = '';
+  getCountryInfo(iso)
+    .then(countryInfo => {
+      var vectorLayer = new ol.layer.Vector({
+      source: new ol.source.Vector({
+        url: 'https://raw.githubusercontent.com/mledoze/countries/master/'+countryInfo.alpha3Code.toLowerCase()+'.geo.json',
+        format: new ol.format.GeoJSON()
+      })
+    });
+
+    var map = new ol.Map({
+      target: 'mapCountry',
+      layers: [
+        new ol.layer.Tile({
+          source: new ol.source.OSM()
+        }),
+        vectorLayer
+      ],
+      view: new ol.View({
+        center: ol.proj.fromLonLat([-7.6, 31.8]),
+        zoom: 6
+      })
+    });
+      countryZoomName.innerHTML = countryInfo.name;
+      countrZoomFlag.setAttribute("src", countryInfo.flag);
+      zoom_li_name.innerHTML = countryInfo.name; 
+      zoom_li_capital.innerHTML = countryInfo.capital; 
+      zoom_li_population.innerHTML = countryInfo.population; 
+      zoom_li_region.innerHTML = countryInfo.region; 
+      zoom_li_subregion.innerHTML = countryInfo.subregion; 
+      zoom_li_timezones.innerHTML = countryInfo.timezones.join(", "); 
+      zoom_li_currencies.innerHTML = countryInfo.currencies.map(currency => currency.name + " "+ currency.symbol).join(', '); 
+      zoom_li_languages.innerHTML = countryInfo.languages.map(language => language.name).join(', '); 
+      zoom_li_alpha2code.innerHTML = countryInfo.alpha2Code +" - " + countryInfo.alpha3Code; 
+      zoom_li_calling.innerHTML = countryInfo.callingCodes.map(code => code).join(", "); 
+    }) 
 }
 // UPDATE COUNTRIES SECTION 
 function updateCountries(countries, totalCountries) {
@@ -272,30 +529,85 @@ onload = () => {
     // HANDLING POPUPS / MODALS
 
     // LOGIN DIALOG MODAL
+  try {
     loginBtn.addEventListener('click', e => loginModal.showModal());
     loginBtnClose.addEventListener('click', e => loginModal.close());
+  } catch (error) {
+    
+  }
 
     // ALTER COUNTRIES MODAL
     countriesTable.addEventListener("click", function(event) {
       const target = event.target;
 
       if (target.classList.contains("alter-btn")) {
-        const countryCode = target.getAttribute("data-contry");
+        if (authenticated) {
+          const countryCode = target.getAttribute("data-contry");
 
-        // Perform any action or logic based on the clicked alter button
-        // Example: Show a modal, perform an AJAX request, etc.
+        // USER IS AUTHENTICATED 
+          alterModal.querySelector('form').innerHTML = `
+          <div class="field  flx">
+            <label for="countryName" class="icon flx"><i class="fa fa-solid fa-globe"></i></label>
+            <input disabled type="text" value="${countryCode}" name="countryIso" id="countryIso">
+          </div>
+          <div class="field  flx">
+            <label for="capital" class="icon flx"><i class="fa fa-solid fa-flag"></i></label>
+            <input placeholder="capital" type="text" value="" name="capital" id="capital">
+          </div>
+          <div class="field  flx">
+            <label for="population" class="icon flx"><i class="fa fa-solid fa-people-group"></i></label>
+            <input type="number" value='' name="population" id="population">
+          </div>
+          <div class="field buttons  flx">
+            <input placeholder="population" type="submit" name="submit" value="update">
+            <input type="reset" class="alter-btn-close" name="reset" value="cancel">
+          </div>
+          `;
         alterModal.showModal();
         console.log("Clicked alter button for country: ", countryCode);
+        } else {
+          console.log("user not autheticated");
+        }
       }
     });
-    alterBtnClose.addEventListener('click', e => alterModal.close());
+  try {
+    alterModal.addEventListener('click', (e) => {
+      
+      if (e.target.classList.contains("alter-btn-close")) {
+        alterModal.close();
+      }
+    })
+  } catch (e) {
+    // CATCHED ERROR
+  }
 
-    // SEARCH BARS
+  // ULTER COUNTRY SUBMISSION
+  alterModal.querySelector("form").onsubmit = function (e) {
+    
+    let iso = alterModal.querySelector("form").querySelector("#countryIso").value;
+    let population = alterModal.querySelector("form").querySelector("#population").value;
+    let capital = alterModal.querySelector("form").querySelector("#capital").value;
+
+    // APPLYING FILTERS 
+    capital = sanitizeInput(capital);
+    iso = sanitizeInput(iso);
+    let filterPopulation = (population) => {
+      try {
+        return population.match(/\d+/g).join("");
+      } catch (e) {
+        return 0;
+      }
+    };
+    updateCountry(iso ,filterPopulation(population) , capital);
+  }
+
+
+  // SEARCH BARS
   searchCountryBars.forEach((searchbar) => {
 
     // SELECTING THE PARENT ELEMENT CONTAINER AND THEN SELECTING THE RESULT BOX
     const resultsContainer = searchbar.closest(".search").querySelector(".results");
-    console.log(resultsContainer);
+
     // ADDING THE EVENT INPUT (WHILE TYPING)
     searchbar.addEventListener("input", () => {
 
@@ -361,27 +673,6 @@ onload = () => {
     })
   });
   
-    // GET MAP
-    var vectorLayer = new ol.layer.Vector({
-      source: new ol.source.Vector({
-        url: 'https://raw.githubusercontent.com/mledoze/countries/master/mar.geo.json',
-        format: new ol.format.GeoJSON()
-      })
-    });
-
-    var map = new ol.Map({
-      target: 'mapCountry',
-      layers: [
-        new ol.layer.Tile({
-          source: new ol.source.OSM()
-        }),
-        vectorLayer
-      ],
-      view: new ol.View({
-        center: ol.proj.fromLonLat([-7.6, 31.8]),
-        zoom: 6
-      })
-    });
   
   // SEARCH COUNTRY IN COUNTRY SECTION
   searchInput.addEventListener("input", function () {
@@ -460,6 +751,42 @@ onload = () => {
     countriesTable.prepend(headerRow);
 });
 
+  // LOGIN FORM 
+  loginForm.addEventListener("submit", (e) => {
+    
+    // PREVENTING FORM FROM SUBMITING
+    e.preventDefault();
+
+    // GET INPUTS
+    let userIdInput = document.getElementById("userid");
+    let userPasswordInput = document.getElementById("userpassword");
+
+    // SANITIZE INPUTS
+    let userId = sanitizeInput(userIdInput.value);
+    let userPassword = sanitizeInput(userPasswordInput.value);
+
+    // VALIDATE INPUTS
+    if (userId.trim() === "") {
+
+      userIdInput.closest(".field").style.cssText= " outline : 1px solid #fe9496;";
+      userIdInput.focus();
+      return;
+    } else {
+      userIdInput.closest(".field").style.cssText= " outline : none";
+    }
+    if (userPassword.trim() === "") {
+
+      userPasswordInput.closest(".field").style.cssText= " outline : 1px solid #fe9496;";
+      userPasswordInput.focus();
+      return;
+    } else {
+      userPasswordInput.closest(".field").style.cssText= " outline : none";
+    }
+
+    console.log(authentication(userId, userPassword));
+    // RESET FORM
+    // loginForm.reset();
+  });
     // ========================= INIT FUNCTIONS ==========================
     // FETCHING DATA;
     fetchData();

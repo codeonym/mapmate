@@ -7,60 +7,34 @@
           </label>
           <div class="results flx">
               <div class="container scroll">
-                <div data-iso="MA" class="country flx">
-                  <img src="assets/flags/MA.svg" alt="">
-                  <span>Morocco</span>
-                </div>
-                <div data-iso="MA" class="country flx">
-                  <img src="assets/flags/MA.svg" alt="">
-                  <span>Morocco</span>
-                </div>
-                <div data-iso="MA" class="country flx">
-                  <img src="assets/flags/MA.svg" alt="">
-                  <span>Morocco</span>
-                </div>
-                <div data-iso="MA" class="country flx">
-                  <img src="assets/flags/MA.svg" alt="">
-                  <span>Morocco</span>
-                </div>
-                <div data-iso="MA" class="country flx">
-                  <img src="assets/flags/MA.svg" alt="">
-                  <span>Morocco</span>
-                </div>
-                <div data-iso="MA" class="country flx">
-                  <img src="assets/flags/MA.svg" alt="">
-                  <span>Morocco</span>
-                </div>
               </div>
             </div>
         </div>
           <div class="boxes scroll grid ">
             <div class="box py-1 px-1 flx-c flx">
-              <h1>Morocco
+              <h1 id="country-zoom-name">
                 <span class="outer" aria-hidden="true">
-                  <span class="inner">Morocco</span> 
+                  <span class="inner" ></span> 
                 </span>  
               </h1>
-              <img src="assets/flags/MA.svg" alt="" srcset="">
+              <img id="country-zoom-flag"  alt="" srcset="">
             </div>
-            <div class="box flx py-1 px-1 flx-c">
-              <div class="mapCountry" id="mapCountry">
-
-              </div>
+            <div id="mapCountryContainer" class="box  flx py-1 px-1 flx-c">
+              <div class="mapCountry" id="mapCountry"></div>
             </div>
-            <div class="box py-1 px-1 flx-c">
+            <div id="country-zoom-info" class="box py-1 px-1 flx-c">
               <ul class="details scroll">
-                <li><strong>Name:</strong> <span class="name">Morocco</span></li>
-                <li><strong>Capital:</strong> <span class="capital">Rabat</span></li>
-                <li><strong>Population:</strong> <span class="population">37015411</span></li>
-                <li><strong>Region:</strong> <span class="region">Africa</span></li>
-                <li><strong>Subregion:</strong> <span class="subregion">North-Arfica</span></li>
-                <li><strong>Timezones:</strong> <span class="timezones">UTC+1</span></li>
-                <li><strong>Currencies:</strong> <span class="currencies">MAD</span></li>
-                <li><strong>Languages:</strong> <span class="languages">Arabic</span></li>
-                <li><strong>ISO code:</strong> <span class="alpha-2">MA</span></li>
-                <li><strong>Calling Code:</strong> <span class="calling">212</span></li>
-              </ul>
+                <li ><strong>Name:</strong> <span id="zoom-li-name"></span></li>
+                <li ><strong>Capital:</strong> <span id="zoom-li-capital"></span></li>
+                <li ><strong>Population:</strong> <span id="zoom-li-population"></span></li>
+                <li ><strong>Region:</strong> <span id="zoom-li-region"></span></li>
+                <li ><strong>Subregion:</strong> <span id="zoom-li-subregion"></span></li>
+                <li ><strong>Timezones:</strong> <span id="zoom-li-timezones"></span></li>
+                <li ><strong>Currencies:</strong> <span id="zoom-li-currencies"></span></li>
+                <li ><strong>Languages:</strong> <span id="zoom-li-languages"></span></li>
+                <li ><strong>ISO code:</strong> <span id="zoom-li-alpha2code"></span></li>
+                <li ><strong>Calling Code:</strong> <span id="zoom-li-calling"></span></li>
+  </ul>
             </div>
             <div class="box py-1 px-1 flx-c">
               <h3>Export Data</h3>

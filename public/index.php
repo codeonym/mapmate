@@ -1,7 +1,7 @@
 <?php
-// session_start();
-// var_dump($_SESSION);
-
+session_start();
+// session_destroy();
+$stat = $_SESSION['loggedin'] ?? false;
 ?>
 
 <!DOCTYPE html>
@@ -69,7 +69,11 @@
   </div>
   <!-- END MAIN CONTENT -->
   <!-- START SCRIPTS -->
+  <!-- REST COUNTRIES API -->
+  <script src="https://unpkg.com/whatwg-fetch@3.6.2/dist/fetch.umd.js"></script>
+  <!-- JQUERY -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- MAIN SCRIPT -->
   <script src="js/main.js"></script>
   <!-- END SCRIPTS -->
 </body>

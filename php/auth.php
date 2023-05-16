@@ -39,6 +39,9 @@ if(isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
       
         // PASSWORD VERIFICATION
         if(password_verify($data["password"],$user["password"])){ //PASSWORD VERIFIED
+
+          // REGENERATE SESSION ID AFTER EACH LOGIN FOR FARTHER SECURITY (EACH SESSION HAS A UNIQUE ID)
+          session_regenerate_id(true);
           
           // SETTING / SAVING  THE SESSION VARIABLES / USERDATA
           $_SESSION['loggedin']= true;

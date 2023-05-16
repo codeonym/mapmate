@@ -203,7 +203,8 @@ body {
 .modal .popup .field input {
   border:none;
 }
-.modal .popup .field input[type="text"] {
+.modal .popup .field input[type="text"] ,
+.modal .popup .field input[type="number"]{
   flex:0.9;
   padding:0px 20px;
   outline:none;
@@ -696,20 +697,20 @@ body {
   right:20px;
   border-color:transparent transparent var(--col-grey-light-50) transparent;
 }
-.content header .profile .expand .login-btn {
-  display:none;
-}
+
 .content header .profile .expand .opt {
   list-style: none;
   width:100%;
   /* display:none; */
 }
-.content header .profile .expand li {
-  padding:0.5rem 0rem;
+.content header .profile .expand li ,
+.content header .profile .expand div {
+  padding:0.5rem 0.3rem;
   transition:.2s linear all;
   border-radius:0.5rem;
 }
-.content header .profile .expand li:hover {
+.content header .profile .expand li:hover ,
+.content header .profile .expand div:hover {
   background-color:var(--col-purple);
 }
 .content header .profile .expand i {
@@ -719,7 +720,8 @@ body {
 .content header .profile .expand li * {
   transition:.2s linear all;
 }
-.content header .profile .expand li:hover * {
+.content header .profile .expand li:hover * ,
+.content header .profile .expand div:hover *{
   color:var(--col-light);
 }
 .content header .profile .expand li:hover i  {

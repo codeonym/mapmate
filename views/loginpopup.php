@@ -1,13 +1,13 @@
 <dialog class=" modal login-modal">
 <button class="close-btn login-btn-close"><i class="fa fa-solid fa-rectangle-xmark"></i></button>
-<form action="" class="popup login flx flx-c">
+<form action="" id="loginForm" class="popup login flx flx-c">
   <div class="field  flx">
-    <label for="username" class="icon flx"><i class="fa fa-solid fa-user-alt"></i></label>
-    <input type="text" name="username" id="username">
+    <label for="userid" class="icon flx"><i class="fa fa-solid fa-user-alt"></i></label>
+    <input type="text" name="userid" id="userid">
   </div>
   <div class="field  flx">
-    <label for="password" class="icon flx"><i class="fa fa-solid fa-key"></i></label>
-    <input type="text" name="password" id="password">
+    <label for="userpassword" class="icon flx"><i class="fa fa-solid fa-key"></i></label>
+    <input type="text" name="userpassword" id="userpassword">
   </div>
   <div class="field  flx">
     <input type="checkbox" name="rememberme" id="rememberme">

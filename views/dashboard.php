@@ -1,3 +1,4 @@
+
 <div class="row close dashboard flx flx-c px-1 py-2">
   <div  class="closer flx"><i class=" flx fa fa-1x fa-chevron-right"></i></div>
   <div class="logo my-1 flx py-1 px-2">
@@ -14,10 +15,14 @@
     </ul>
   <h4>Preferences</h4>
     <ul class="links flx flx-c">
-      <li data-cap="settings" class="flx"><i class="fa fa-gear"></i><a href="#">Settings</a></li>
+      <?php if($stat):?>
+      <li data-cap="settings" id="settings" class="flx"><i class="fa fa-gear"></i><a href="#">Settings</a></li>
+      <?php endif;?>
       <li data-cap="aboutus" class="flx"><i class="fa fa-mug-hot"></i><a href="#">About Us</a></li>
       <li data-cap="contactus" class="flx"><i class="fa fa-solid fa-paper-plane"></i><a href="#">Contact Us</a></li>
-      <li data-cap="logout" class="flx logout"><i class="fa fa-solid fa-arrow-right-from-bracket"></i><a href="#">Logout</a></li>
+      <?php if($stat):?>
+      <li data-cap="logout" onClick="logOut()" class="flx logout"><i class="fa fa-solid fa-arrow-right-from-bracket"></i><a href="#">Logout</a></li>
+      <?php endif;?>
     </ul>
   </div>
 </div>

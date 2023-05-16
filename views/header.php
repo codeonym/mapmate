@@ -1,3 +1,4 @@
+
 <header class="flx py-1 px-2">
   <div class="row flx">
     <div class="lang bbn flx">
@@ -15,46 +16,29 @@
       <button class="go flx " value="search"><i class="fa fa-solid fa-magnifying-glass"></i></button>
       <div class="results flx">
         <div class="container scroll">
-          <div data-iso="MA" class="country flx">
-            <img src="assets/flags/MA.svg" alt="">
-            <span>Morocco</span>
-          </div>
-          <div data-iso="MA" class="country flx">
-            <img src="assets/flags/MA.svg" alt="">
-            <span>Morocco</span>
-          </div>
-          <div data-iso="MA" class="country flx">
-            <img src="assets/flags/MA.svg" alt="">
-            <span>Morocco</span>
-          </div>
-          <div data-iso="MA" class="country flx">
-            <img src="assets/flags/MA.svg" alt="">
-            <span>Morocco</span>
-          </div>
-          <div data-iso="MA" class="country flx">
-            <img src="assets/flags/MA.svg" alt="">
-            <span>Morocco</span>
-          </div>
-          <div data-iso="MA" class="country flx">
-            <img src="assets/flags/MA.svg" alt="">
-            <span>Morocco</span>
-          </div>
         </div>
       </div>
     </div>
   </div>
   <div class="profile row flx ">
     <div class="pic">
-      <img src="assets/avatars/avatar01.png" alt="">
+      <?php if($stat):?>
+      <img src="<?php echo $_SESSION["user"]["avatar"]; ?>" alt="">
+      <?php else: ?>
+        <img src="assets/avatars/user.png" alt="">
+      <?php endif;?>
     </div>
     <i class="chevron fa fa-chevron-down" aria-hidden="true"></i>
     <div class="expand px-1 py-1 flx flx-c">
-      <div class="login-btn"><i class="fa fa-solid fa-arrow-right-to-bracket"></i><span>Login</span></div>
-      <ul class="opt">
-        <li><i class="fa fa-solid fa-user-alt"></i><span>kiraxdesu</span></li>
-        <li><i class="fa fa-solid fa-gear"></i><span>Settings</span></li>
-        <li><i class="fa fa-solid fa-arrow-right-from-bracket"></i><span>Logout</span></li>
+      <?php if($stat):?>
+        <ul class="opt">
+        <li><i class="fa fa-solid fa-user-alt"></i><span><?php echo $_SESSION["user"]["username"] ?></span></li>
+        <li onclick="document.getElementById('settings').click();"><i class="fa fa-solid fa-gear"></i><span>Settings</span></li>
+        <li onclick="logOut()"><i class="fa fa-solid fa-arrow-right-from-bracket"></i><span>Logout</span></li>
       </ul>
+      <?php else: ?>
+      <div class="login-btn"><i class="fa fa-solid fa-arrow-right-to-bracket"></i><span>Login</span></div>
+      <?php endif;?>
     </div>
   </div>
 </header>
