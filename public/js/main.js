@@ -39,6 +39,9 @@ const sortSelect = document.querySelector(".sortby");
 
 const loginForm = document.querySelector("#loginForm");
 
+const updatePasswordForm = document.querySelector("#password-reset-form");
+
+
 // GLOBAL VARS
 let countriesData = [];
 
@@ -156,7 +159,7 @@ function updateCountry(iso,population,capital) {
 // UPDATE PASSWORD
 function updatePassword(newPassword,currentPassword) {
   $.ajax({
-    url: "/MAPMATE/php/auth.php",
+    url: "/MAPMATE/php/resetpassword.php",
     method: "POST",
     dataType: "json",
     data: {
@@ -166,12 +169,9 @@ function updatePassword(newPassword,currentPassword) {
     success: function (data) {
       console.log(data);
       if (data.success) {
-        location.reload();
-        sessionStorage.setItem("authenticated","true");
-        showPopupAlert('Login success', '#1bcfb4');
+        showPopupAlert(data.message, '#1bcfb4');
       } else {
-        sessionStorage.removeItem("authenticated")
-        showPopupAlert('Login failed', '#fe9496');
+        showPopupAlert(data.message, '#fe9496');
       }
     },
     error: function(xhr, status, error) {
@@ -787,6 +787,21 @@ onload = () => {
     // RESET FORM
     // loginForm.reset();
   });
+
+  // UPDATE PASSWORD FORM 
+  updatePasswordForm.onsubmit = function (e) {
+    e.preventDefault();
+    // GETTING INPUTS VALUES AND SANITIZING
+    const currentPassword = sanitizeInput(updatePasswordForm.querySelector("#currentpassword").value);
+    const newPassword = sanitizeInput(updatePasswordForm.querySelector("#newpassword").value);
+
+    // CHECKING IF BOTH PASSWORD ARE SET
+    if (currentPassword != "" && newPassword != "") {
+      
+      // AJAX CALLING
+      updatePassword(newPassword, currentPassword);
+    }
+  };
     // ========================= INIT FUNCTIONS ==========================
     // FETCHING DATA;
     fetchData();

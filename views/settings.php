@@ -11,17 +11,17 @@
       <div class="row confs scroll flx">
         <div data-cap="password-reset" class="section password-reset">
           <h3>Password Reset</h3>
-          <form>
+          <form id="password-reset-form">
             <div class="form-group">
-              <label for="current-password">Current Password:</label>
-              <input type="password" id="current-password" required>
+              <label for="currentpassword">Current Password:</label>
+              <input type="password" id="currentpassword" required>
             </div>
             <div class="form-group">
-              <label for="new-password">New Password:</label>
-              <input type="password" id="new-password" required>
+              <label for="newpassword">New Password:</label>
+              <input type="password" id="newpassword" required>
             </div>
             <div class="form-group">
-              <button type="submit" id="reset-password">Reset Password</button>
+              <button type="submit" id="resetpassword">Reset Password</button>
             </div>
           </form>
         </div>
