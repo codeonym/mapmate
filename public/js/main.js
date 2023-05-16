@@ -32,7 +32,7 @@ const countriesTotal = document.querySelector(".countries .head .options");
 
 const navigationGobalStats = document.querySelector(".navigation .global-statistics");
 const navigationTime = document.querySelector(".navigation .time-container table tbody");
-const navigationWeather = document.querySelector(".navigation .weather-container");
+const navigationWeather = document.querySelector(".navigation .weather-container table tbody");
 
 const searchInput = document.querySelector("#searchCountry");
 const sortSelect = document.querySelector(".sortby");
@@ -41,14 +41,16 @@ const loginForm = document.querySelector("#loginForm");
 
 const updatePasswordForm = document.querySelector("#password-reset-form");
 
+const paginationContainer = document.querySelectorAll(".pagination-container");
+
+const paginationTime = document.querySelector(".pagination.pagination-time");
+
+const paginationWeather = document.querySelector(".pagination.pagination-weather");
 
 // GLOBAL VARS
 let countriesData = [];
 
 let authenticated = sessionStorage.getItem("authenticated") === "true";
-
-const apiKeyTimeZoneDb = 'EVJBG8P17IUE'; // Replace with your API key from TimezoneDB
-
 
 // FUNCTIONS
 // ======================== AJAX BLOCK =====================
@@ -179,7 +181,37 @@ function updatePassword(newPassword,currentPassword) {
     }
   });
 }
+
+// GET WEATHER 
+function getWeather(country) {
+  return new Promise((resolve, reject) => {
+    $.ajax({
+      url: "/MAPMATE/php/weather.php",
+      method: "POST",
+      dataType: "json",
+      data: {
+        "country": country
+      },
+      success: function (data) {
+        const weather = {
+          "main": data.weather[0].main,
+          "description": data.weather[0].description,
+          "src": "https://openweathermap.org/img/wn/" + data.weather[0].icon + ".png"
+        };
+        console.log(weather);
+        resolve(weather);
+      },
+      error: function (xhr, status, error) {
+        console.log("An error occurred: " + error);
+        reject(error);
+      }
+    });
+  });
+}
+
+
 // ================= END AJAX BLOCK ========================
+
 function showPopupAlert(message , color) {
   // Create the popup alert element
   var popupAlert = $('<div>', {
@@ -225,21 +257,25 @@ function showPopupAlert(message , color) {
   });
 }
 
-// Example usage:
-showPopupAlert('Login failed');
-
 
 // UPDATE UI 
 function updateUI() {
+
+  // UPDATING THE GLOBAL STATISTICS
+  navigationGobalStats.querySelector(".population h1").innerText = countriesData["totalPopulation"];
+  navigationGobalStats.querySelector(".total-countries h1").innerText = countriesData["totalPays"];
+  navigationGobalStats.querySelector(".total-timezones h1").innerText = countriesData["totalTimezones"];
+
   updateCountries(countriesData["countries"], countriesData["totalPays"]);
-  updateNavigation(countriesData, 1, 5);
+  updateNavigationTime(countriesData, paginationTime.dataset.page, 5);
+  // updateNavigationWeather(countriesData, paginationWeather.dataset.page, 5);
 }
 
 // NAVIGATION FUNCTION
 function navigate(links,elements) {
   links.forEach((link) => {
     link.addEventListener("click", (e) => {
-      console.log(link.dataset.cap);
+
       elements.forEach((entry) => {
         if (entry.dataset.cap === link.dataset.cap) {
           entry.classList.add("open");
@@ -320,7 +356,7 @@ function zoomCountry(iso, openSection = false) {
     .then(countryInfo => {
       var vectorLayer = new ol.layer.Vector({
       source: new ol.source.Vector({
-        url: 'https://raw.githubusercontent.com/mledoze/countries/master/'+countryInfo.alpha3Code.toLowerCase()+'.geo.json',
+        url: 'https://raw.githubusercontent.com/mledoze/countries/master/'+countryInfo["alpha3Code"].toLowerCase()+'.geo.json',
         format: new ol.format.GeoJSON()
       })
     });
@@ -388,12 +424,7 @@ function updateCountries(countries, totalCountries) {
 
 }
   // UPDATE NAVIGATION SECTION
-function updateNavigation(data, currentPage = 1, itemsPerPage = 10) {
-
-  // UPDATING THE GLOBAL STATISTICS
-  navigationGobalStats.querySelector(".population h1").innerText = data["totalPopulation"];
-  navigationGobalStats.querySelector(".total-countries h1").innerText = data["totalPays"];
-  navigationGobalStats.querySelector(".total-timezones h1").innerText = data["totalTimezones"];
+function updateNavigationTime(data, currentPage = 1, itemsPerPage = 5) {
 
   // PAGINATION
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -419,7 +450,62 @@ function updateNavigation(data, currentPage = 1, itemsPerPage = 10) {
       </tr>
     `;
   }
+  console.log("click");;
+  if (Math.floor(+countriesData["totalPays"] / itemsPerPage) < +paginationTime.dataset.page) {
+    paginationTime.dataset.page = 1;
+  } else {
+    paginationTime.dataset.page = +paginationTime.dataset.page + 1;
+  }
   navigationTime.innerHTML = tableRows;
+}
+
+function updateNavigationWeather(data, currentPage = 1, itemsPerPage = 5) {
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const countriesToShow = data["countries"].slice(startIndex, endIndex);
+
+  let tableRows = `
+    <tr>
+      <td>country</td>
+      <td>main</td>
+      <td>description</td>
+      <td>icon</td>
+    </tr>
+  `;
+
+  console.log("called weather method");
+
+  const fetchWeatherPromises = countriesToShow.map(country => {
+    return getWeather(country['nom_en_gb']);
+  });
+
+  Promise.all(fetchWeatherPromises)
+    .then(weatherData => {
+      for (let i = 0; i < countriesToShow.length; i++) {
+        const country = countriesToShow[i];
+        const weather = weatherData[i];
+
+        tableRows += `
+          <tr class="weather-container-tz">
+            <td>${country['nom_en_gb']}</td>
+            <td>${weather.main}</td>
+            <td>${weather.description}</td>
+            <td><img src="${weather.src}"></td>
+          </tr>
+        `;
+      }
+
+      if (Math.floor(+countriesData["totalPays"] / itemsPerPage) < +paginationWeather.dataset.page) {
+        paginationWeather.dataset.page = 1;
+      } else {
+        paginationWeather.dataset.page = +paginationWeather.dataset.page + 1;
+      }
+
+      navigationWeather.innerHTML = tableRows;
+    })
+    .catch(error => {
+      console.log("An error occurred: " + error);
+    });
 }
 
 // GET TIME BY TIME ZONE
@@ -452,6 +538,19 @@ function getTimeByTimeZone(timeZone) {
   }
 }
 
+//  GENERATE PDF FILE
+function generatePDF(element) {
+  const pdf = new jsPDF();
+
+  // Convert HTML to PDF
+  pdf.fromHTML(element, 10, 10, {
+    width: 180
+  });
+  
+  // Save the PDF
+  pdf.save('output.pdf');
+}
+
 // =================== SETINTRVAL FUNCTIONS =============================
 function updateTimes() {
 
@@ -473,7 +572,7 @@ function updateTimes() {
 setInterval(updateTimes, 1000)
   // SCRIPT TO RUN AFTER LAODING THE DOCUMENT
 onload = () => {
-    
+
     // TOGGLE DASHBOARD
     dashboardCloser.addEventListener('click', () => {
       dashboardCloser.closest(".dashboard").classList.toggle("close");
@@ -512,8 +611,6 @@ onload = () => {
       secondHand.style.transform = `translate(-50%, -100%) rotate(${secondHandRotation}deg)`;
     }
 
-    // first call 
-    updateTime();
     // update clock after 1s
     setInterval(updateTime, 1000);
 
@@ -751,6 +848,18 @@ onload = () => {
     countriesTable.prepend(headerRow);
 });
 
+  // PAGINATION
+  paginationTime.addEventListener("click", (e) => {
+    let currentPage = paginationTime.dataset.page;
+    updateNavigationTime(countriesData, currentPage, 5);
+  });
+  paginationWeather.addEventListener("click", (e) => {
+    console.log("clicked");
+    let currentPage = paginationWeather.dataset.page;
+    updateNavigationWeather(countriesData,currentPage, 5);
+  })
+
+  
   // LOGIN FORM 
   loginForm.addEventListener("submit", (e) => {
     
@@ -802,10 +911,14 @@ onload = () => {
       updatePassword(newPassword, currentPassword);
     }
   };
-    // ========================= INIT FUNCTIONS ==========================
-    // FETCHING DATA;
-    fetchData();
+  // ========================= INIT FUNCTIONS ==========================
 
-    // UPDATE TIME EVRY SECOND
+  // UPDATE CLOCK
+  updateTime();
+  
+  // FETCHING DATA;
+  fetchData();
+  
+  // UPDATE TIME EVERY SECOND (NAVIGATION SECTION)
     updateTimes()
   }

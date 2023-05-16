@@ -147,6 +147,26 @@ body {
 
 /* END WEB STRUCT */
 
+
+/* START PAGINATION */
+.pagination-container {
+  position:relative;
+}
+.pagination {
+  position:absolute;
+  width:100%;
+  cursor: pointer;
+  text-align: center;
+  background:linear-gradient(to top, var(--col-grey-dark),transparent 50%);
+  padding:1rem 3rem;
+  left:50%;
+  color:var(--col-purple);
+  text-decoration: none;
+  transform:translateX(-50%);
+  bottom:0rem;
+}
+/* END PAGINATION */
+
 /* START POPUPS / MODALS */
 
 /* LOGIN MODAL */
@@ -203,6 +223,7 @@ body {
 .modal .popup .field input {
   border:none;
 }
+
 .modal .popup .field input[type="text"] ,
 .modal .popup .field input[type="number"]{
   flex:0.9;
@@ -1181,18 +1202,8 @@ body {
 .countries .container table td img {
   width:2.2rem;
 }
-section .pagination-triger {
-  position:absolute;
-  width:100%;
-  text-align: center;
-  background:linear-gradient(to top, var(--col-grey-dark),transparent 50%);
-  padding:1rem 3rem;
-  left:50%;
-  color:var(--col-dark);
-  text-decoration: none;
-  transform:translateX(-50%);
-  bottom:0rem;
-}
+
+
 /* END COUNTRIES */
 
 /* ############################## */

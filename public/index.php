@@ -82,6 +82,8 @@ $stat = $_SESSION['loggedin'] ?? false;
   <script src="https://unpkg.com/whatwg-fetch@3.6.2/dist/fetch.umd.js"></script>
   <!-- JQUERY -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script> -->
   <!-- MAIN SCRIPT -->
   <script src="js/main.js"></script>
   <!-- END SCRIPTS -->

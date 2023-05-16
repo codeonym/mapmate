@@ -1,8 +1,5 @@
 <?php
 
-// // REQUIRE ERROR_LOG HANDLERS
-// require_once __DIR__."/error_log.php";
-
 // REQUIRE THE AUTOLOADER 
 require_once __DIR__ . '/../vendor/autoload.php';
 

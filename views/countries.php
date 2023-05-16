@@ -18,5 +18,4 @@
       </tbody>
     </table>
   </div>
-  <!-- <a class="pagination-triger" data-current=1 href="#">Show More</a> -->
 </section>

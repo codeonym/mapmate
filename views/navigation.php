@@ -3,9 +3,9 @@
     <div class="card flx">
       <div class="box flx flx-c py-3 px-3">
         <h1>Morocco</h1>
-        <h4><i class="fa fa-solid fa-hourglass-half"></i> UTC +1</h3>
+        <h4><i class="fa fa-solid fa-hourglass-half"></i><?php echo (date_default_timezone_get()) ?></h3>
         <h4><i class="fa fa-solid fa-map-location-dot"></i> North Africa</h3>
-        <h4><i class="fa fa-solid fa-calendar-days"></i> 06-05-2023</h3>
+        <h4><i class="fa fa-solid fa-calendar-days"></i> <?php echo (date("d-m-Y"))?></h3>
       </div>
       <div class="hour-container flx py-3 px-3">
         <div class="hour">
@@ -37,7 +37,7 @@
         
       </div>
     </div>
-    <div class="card time-container py-1">
+    <div class="card time-container py-1 pagination-container" data-type='time'>
       <h3 class="px-1 py-1">Time</h3>
       <div class="table scroll">
         <table border="0" cellspacing="0" class="px-1 py-1">
@@ -50,67 +50,18 @@
         
       </table>
       </div>
+      <div class="pagination pagination-time flx" data-page="1">Show More</div>
     </div>
-    <div class="card px-1 weather-container py-1">
+    <div class="card px-1 weather-container pagination-container py-1" data-type='weather'>
       <h3 class="px-1 py-1">Weather</h3>
       <div class="table scroll">
         <table border="0" cellspacing="0" class="px-1 py-1">
-        <tr>
-          <td>Index</td>
-          <td>Country</td>
-          <td>Date</td>
-          <td>Weather</td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>morocco</td>
-          <td>22-01-2023</td>
-          <td><i class="fa fa-solid fa-cloud"></i></td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>morocco</td>
-          <td>22-01-2023</td>
-          <td><i class="fa fa-solid fa-cloud-sun"></i></td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>morocco</td>
-          <td>22-01-2023</td>
-          <td><i class="fa fa-solid fa-cloud"></i></td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td>morocco</td>
-          <td>22-01-2023</td>
-          <td><i class="fa fa-solid fa-cloud-rain"></i></td>
-        </tr>
-        <tr>
-          <td>5</td>
-          <td>morocco</td>
-          <td>22-01-2023</td>
-          <td><i class="fa fa-solid fa-sun"></i></td>
-        </tr>
-        <tr>
-          <td>6</td>
-          <td>morocco</td>
-          <td>22-01-2023</td>
-          <td><i class="fa fa-solid fa-cloud-sun"></i></td>
-        </tr>
-        <tr>
-          <td>7</td>
-          <td>morocco</td>
-          <td>22-01-2023</td>
-          <td><i class="fa fa-solid fa-cloud"></i></td>
-        </tr>
-        <tr>
-          <td>8</td>
-          <td>morocco</td>
-          <td>22-01-2023</td>
-          <td><i class="fa fa-solid fa-cloud-rain"></i></td>
-        </tr>
+        <tbody>
+          
+        </tbody>
       </table>
       </div>
+      <div class="pagination pagination-weather flx" data-page="1">Show More</div>
     </div>
   </div>
 </section>

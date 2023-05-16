@@ -47,18 +47,7 @@
               </tr>
             </thead>
             <tbody id="login-history-rows">
-              <tr>
-                <td>May 1, 2023</td>
-                <td>10:30 AM</td>
-                <td>New York, NY</td>
-                <td>MacBook Pro</td>
-              </tr>
-              <tr>
-                <td>May 2, 2023</td>
-                <td>3:15 PM</td>
-                <td>San Francisco, CA</td>
-                <td>iPhone X</td>
-              </tr>
+              
             </tbody>
           </table>
         </div>

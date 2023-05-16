@@ -39,13 +39,13 @@
             <div class="box py-1 px-1 flx-c">
               <h3>Export Data</h3>
               <div class="buttons flx flx-c">
-                <button data-type="PDF" class="export">
+                <button id="pdf-btn" data-type="PDF" class="export">
                 PDF
               </button>
-              <button data-type="CSV" class="export">
+              <button id="csv-btn"  data-type="CSV" class="export">
                 CSV
               </button>
-              <button data-type="JSON" class="export">
+              <button id="json" data-type="JSON" class="export">
                 JSON
               </button>
               </div>
