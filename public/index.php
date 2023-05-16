@@ -1,6 +1,15 @@
 <?php
+// // SETTING ERROR REPORTING
+// error_reporting(E_ALL);
+// ini_set('display_errors', 0);
+// ini_set('log_errors', 1);
+// ini_set('error_log',__DIR__."/../logs/error.log");
+
+// // REQUIRING ERROR HANDLER
+// require_once __DIR__."/../php/error_log.php";
+// START SESSION
 session_start();
-// session_destroy();
+
 $stat = $_SESSION['loggedin'] ?? false;
 ?>
 

@@ -3,7 +3,12 @@
     "description": "A simple php project to interact with world countries database and execute basic functionalities...",
     "type": "project",
     "require": {
-        "vlucas/phpdotenv": "^5.5"
+        "vlucas/phpdotenv": "^5.5",
+        "geoip2/geoip2": "^2.13",
+        "mobiledetect/mobiledetectlib": "^3.74",
+        "jenssegers/agent": "^2.1",
+        "maxmind/web-service-common": "^0.9.0",
+        "maxmind/geoip": "^1.1"
     },
     "autoload": {
         "psr-4": {
