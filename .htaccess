@@ -1,0 +1,7 @@
+RewriteEngine On
+
+# Redirect to index.php if accessing the root directory
+#RewriteRule ^$ public/index.php [L]
+
+# Prevent access to non-public files
+# RewriteRule ^(?!public/).+ - [F,L]
