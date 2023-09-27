@@ -1,6 +1,6 @@
 # mapmate
 
-![mapmate Logo](public/assets/logos/mapmate5.png)
+![mapmate Logo](public/assets/logos/mapmate1.png)
 
 ## Description
 "mapmate" is a web application that provides access to a world countries database and offers several features, including weather information, current time/timezone details, and country-specific data visualization on a world map.
