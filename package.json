@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kiraXdesu/mapmate.git"
+    "url": "git+https://github.com/codeonym/mapmate.git"
   },
   "keywords": [
     "world",
@@ -22,10 +22,10 @@
     "school",
     "assignement"
   ],
-  "author": "kiraxdesu",
+  "author": "codeonym",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kiraXdesu/mapmate/issues"
+    "url": "https://github.com/codeonym/mapmate/issues"
   },
-  "homepage": "https://github.com/kiraXdesu/mapmate#readme"
+  "homepage": "https://github.com/codeonym/mapmate#readme"
 }
