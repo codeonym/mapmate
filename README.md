@@ -56,4 +56,4 @@ Here are some screenshots of the "mapmate" web application:
 ## Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/kiraXdesu/mapmate.git
+   git clone https://github.com/codeonym/mapmate.git
