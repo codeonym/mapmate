@@ -1,5 +1,5 @@
 {
-    "name": "kiraxdesu/mapmate",
+    "name": "codeonym/mapmate",
     "description": "A simple php project to interact with world countries database and execute basic functionalities...",
     "type": "project",
     "require": {
@@ -12,12 +12,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Kiraxdesu\\Mapmate\\": "App/"
+            "codeonym\\Mapmate\\": "App/"
         }
     },
     "authors": [
         {
-            "name": "kiraxdesu"
+            "name": "codeonym"
         }
     ]
 }
